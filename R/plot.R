@@ -13,7 +13,7 @@ auto_exts = c(
 
   svglite = 'svg', gridSVG = 'svg',
 
-  ragg_png = 'png',
+  ragg_png = 'png', ragg_webp = 'webp',
 
   tikz = 'tex'
 )
@@ -92,6 +92,9 @@ dev_get = function(dev, options = opts_current$get(), dpi = options$dpi[1]) {
     ragg_png = function(...) {
       ragg_png_dev(..., res = dpi, units = 'in')
     },
+    ragg_webp = function(...) {
+      ragg_webp_dev(..., res = dpi, units = 'in')
+    },
 
     tikz = function(...) {
       tikz_dev(..., sanitize = options$sanitize, standAlone = options$external)
@@ -124,15 +127,18 @@ tikz_dev = function(..., engine = getOption('tikzDefaultEngine')) {
   tikzDevice::tikz(..., packages = c('\n\\nonstopmode\n', packages, .knitEnv$tikzPackages))
 }
 
-# a wrapper of the ragg::agg_png device
-ragg_png_dev = function(...) {
-  loadNamespace('ragg')
+# a wrapper of the ragg::agg_* device
+ragg_dev = function(dev) function(...) {
   args = list(...)
   # handle bg -> background gracefully
   args$background = args$background %n% args$bg
   args$bg = NULL
-  do.call(ragg::agg_png, args)
+  dev = getFromNamespace(dev, 'ragg')
+  do.call(dev, args)
 }
+
+ragg_png_dev = ragg_dev('agg_png')
+ragg_webp_dev = ragg_dev('agg_webp')
 
 # save a recorded plot
 save_plot = function(plot, name, dev, width, height, ext, dpi, options) {

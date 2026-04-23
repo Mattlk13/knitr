@@ -85,6 +85,21 @@ if (requireNamespace("ragg", quietly = TRUE) &&
   )
 }
 
+if (requireNamespace("ragg", quietly = TRUE) &&
+    !has_error({ragg::agg_webp(); dev.off()})) {
+  assert(
+    'ragg_webp_dev correctly handles bg dev.arg into background arg',
+    {
+      chunk_device(opts_chunk$merge(list(
+        dev = 'ragg_webp', dev.args = list(bg = "grey")
+      )))
+      plot(1:10)
+      dev.off()
+      TRUE
+    }
+  )
+}
+
 # should not error (find `pdf` correctly in grDevices, instead of the one
 # defined below)
 pdf = function() {}

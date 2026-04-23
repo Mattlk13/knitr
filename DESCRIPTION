@@ -1,7 +1,7 @@
 Package: knitr
 Type: Package
 Title: A General-Purpose Package for Dynamic Report Generation in R
-Version: 1.51.6
+Version: 1.51.7
 Authors@R: c(
     person("Yihui", "Xie", role = c("aut", "cre"), email = "xie@yihui.name", comment = c(ORCID = "0000-0003-0645-5666", URL = "https://yihui.org")),
     person("Abhraneel", "Sarma", role = "ctb"),
@@ -138,7 +138,7 @@ Suggests:
     otel,
     otelsdk,
     png,
-    ragg,
+    ragg (>= 1.5.0),
     reticulate (>= 1.4),
     rgl (>= 0.95.1201),
     rlang,
