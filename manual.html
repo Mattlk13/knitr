@@ -52,7 +52,7 @@
 <li><a href="#sec:man-is_low_change"><span class="section-number main-number">25</span> Compare two recorded plots</a></li>
 <li><a href="#sec:man-kable"><span class="section-number main-number">26</span> Create tables in LaTeX, HTML, Markdown and reStructuredText</a></li>
 <li><a href="#sec:man-knit"><span class="section-number main-number">27</span> Knit a document</a></li>
-<li><a href="#sec:man-knit2html"><span class="section-number main-number">28</span> Convert markdown to HTML using knit() and mark_html()</a></li>
+<li><a href="#sec:man-knit2html"><span class="section-number main-number">28</span> Convert markdown to HTML using knit() and litedown::mark()</a></li>
 <li><a href="#sec:man-knit2pandoc"><span class="section-number main-number">29</span> Convert various input files to various output files using <code>knit()</code> and Pandoc</a></li>
 <li><a href="#sec:man-knit2pdf"><span class="section-number main-number">30</span> Convert Rnw or Rrst files to PDF</a></li>
 <li><a href="#sec:man-knit2wp"><span class="section-number main-number">31</span> Knit an R Markdown document and post it to WordPress</a></li>
@@ -2353,18 +2353,18 @@ kable(d2, format = &quot;simple&quot;, caption = &quot;Title of the table&quot;)
 x = as.data.frame(matrix(rnorm(60, 1e+06, 10000), 10))
 kable(x, format.args = list(decimal.mark = &quot;,&quot;, big.mark = &quot;'&quot;))
 </code></pre>
-<pre><code>#&gt; |        V1|          V2|          V3|          V4|          V5|          V6|
-#&gt; |---------:|-----------:|-----------:|-----------:|-----------:|-----------:|
-#&gt; | 1'014'185| 1'007'861,5|   987'861,4|   998'834,6|   991'400,1|   997'117,4|
-#&gt; | 1'010'597|   994'957,5| 1'000'135,7|   989'845,8|   997'432,5| 1'000'808,2|
-#&gt; | 1'003'812| 1'009'771,1|   999'658,9|   999'563,2| 1'003'171,4|   978'700,3|
-#&gt; | 1'001'371|   998'259,4| 1'004'341,2| 1'000'669,5|   992'457,3| 1'002'378,6|
-#&gt; | 1'009'860| 1'009'117,7| 1'001'164,9| 1'006'521,0| 1'014'944,1| 1'002'738,8|
-#&gt; | 1'009'595|   988'042,4| 1'009'648,6| 1'006'586,7| 1'022'101,1| 1'015'021,6|
-#&gt; | 1'001'325| 1'002'359,2|   982'458,6| 1'005'635,1| 1'003'199,6|   996'033,6|
-#&gt; | 1'007'073| 1'019'901,2| 1'030'381,4|   997'959,2|   996'533,7| 1'008'678,8|
-#&gt; | 1'003'444| 1'010'140,2|   998'537,9|   997'282,9| 1'005'455,6|   999'152,0|
-#&gt; | 1'009'549|   997'525,5| 1'007'183,5|   997'382,0|   989'409,8| 1'006'268,3|
+<pre><code>#&gt; |          V1|          V2|          V3|          V4|          V5|          V6|
+#&gt; |-----------:|-----------:|-----------:|-----------:|-----------:|-----------:|
+#&gt; | 1'002'733,5|   996'418,6| 1'020'515,1|   999'790,6| 1'001'165,9| 1'008'930,9|
+#&gt; |   993'785,0|   987'974,5|   984'323,4| 1'006'297,0|   987'451,9| 1'003'136,5|
+#&gt; |   973'102,7| 1'002'488,5| 1'010'336,6| 1'015'774,7| 1'003'494,2| 1'001'433,8|
+#&gt; |   994'109,0|   993'282,6|   993'543,6|   987'642,4|   996'689,1| 1'008'074,5|
+#&gt; |   999'182,7| 1'004'505,3| 1'002'034,8|   998'592,9|   997'550,8|   997'072,6|
+#&gt; |   977'245,6|   991'514,2| 1'006'106,4| 1'009'817,9|   995'413,5| 1'003'749,3|
+#&gt; |   996'016,7| 1'010'316,0| 1'011'817,7| 1'013'128,8| 1'004'960,9| 1'001'363,9|
+#&gt; |   995'217,4|   990'984,6| 1'007'638,6| 1'001'312,9| 1'005'483,7| 1'019'518,6|
+#&gt; |   983'676,9|   999'993,1|   988'891,5|   992'946,3| 1'005'662,2| 1'004'544,4|
+#&gt; | 1'014'326,9| 1'000'666,9|   998'010,1|   990'002,5|   996'810,7| 1'003'849,1|
 </code></pre>
 <pre><code class="language-r"># save the value
 x = kable(d2, format = &quot;html&quot;)
@@ -2757,11 +2757,10 @@ get it</a>.
 </code></pre>
 <pre><code class="language-r">unlink(c(&quot;knitr-minimal.tex&quot;, &quot;knitr-minimal.R&quot;, &quot;figure&quot;), recursive = TRUE)
 </code></pre>
-<h2 id="sec:man-knit2html"><span class="section-number main-number">28</span> Convert markdown to HTML using knit() and mark_html()</h2>
+<h2 id="sec:man-knit2html"><span class="section-number main-number">28</span> Convert markdown to HTML using knit() and litedown::mark()</h2>
 <h3 id="sec:description_28" class="unnumbered unlisted">Description</h3>
 <p>This is a convenience function to knit the input markdown source and call
-<code>markdown::<a href="https://rdrr.io/cran/markdown/man/mark_html.html">mark_html</a>()</code> in the <span class="pkg">markdown</span>
-package to convert the result to HTML.
+<code>litedown::<a href="https://rdrr.io/cran/litedown/man/mark.html">mark</a>()</code> to convert the result to HTML.
 </p>
 <h3 id="sec:usage_27" class="unnumbered unlisted">Usage</h3>
 <pre><code class="language-r">knit2html(
@@ -2788,8 +2787,7 @@ working directory.</p>
 </td></tr>
 <tr><td><code>...</code></td>
 <td>
-<p>Options passed to
-<code>markdown::<a href="https://rdrr.io/cran/markdown/man/mark_html.html">mark_html</a>()</code>.</p>
+<p>Options passed to <code>litedown::<a href="https://rdrr.io/cran/litedown/man/mark.html">mark</a>()</code>.</p>
 </td></tr>
 <tr><td><code>envir</code></td>
 <td>
@@ -2823,13 +2821,15 @@ is returned; otherwise the result is written into a file and the filename
 is returned.
 </p>
 <h3 id="sec:note_14" class="unnumbered unlisted">Note</h3>
-<p>The <span class="pkg">markdown</span> package is for R Markdown v1, which is much less
-powerful than R Markdown v2, i.e. the <span class="pkg">rmarkdown</span> package
+<p>This function renders R Markdown v1, which is much less powerful than R
+Markdown v2, i.e. the <span class="pkg">rmarkdown</span> package
 (<a href="https://rmarkdown.rstudio.com">https://rmarkdown.rstudio.com</a>). To render R Markdown v2 documents to
-HTML, please use <code>rmarkdown::render()</code> instead.
+HTML, please use <code>rmarkdown::render()</code> instead. For a lighter-weight
+alternative that handles figure paths robustly, see
+<code>litedown::<a href="https://rdrr.io/cran/litedown/man/fuse.html">fuse</a>()</code>.
 </p>
 <h3 id="sec:see-also_10" class="unnumbered unlisted">See Also</h3>
-<p><code><a href="#sec:man-knit">knit</a></code>, <code>markdown::<a href="https://rdrr.io/cran/markdown/man/mark_html.html">mark_html</a></code>
+<p><code><a href="#sec:man-knit">knit</a></code>, <code>litedown::<a href="https://rdrr.io/cran/litedown/man/mark.html">mark</a></code>
 </p>
 <h3 id="sec:examples_18" class="unnumbered unlisted">Examples</h3>
 <pre><code class="language-r"># a minimal example
@@ -3406,7 +3406,7 @@ access or set hooks in this package.
 </code></pre>
 <pre><code>#&gt; function (x, options) 
 #&gt; x
-#&gt; &lt;bytecode: 0x56195db67658&gt;
+#&gt; &lt;bytecode: 0x55a7fedae8d8&gt;
 #&gt; &lt;environment: namespace:knitr&gt;
 </code></pre>
 <pre><code class="language-r">knit_hooks$get(&quot;inline&quot;)
@@ -3417,7 +3417,7 @@ access or set hooks in this package.
 #&gt;         x = round_digits(x)
 #&gt;     paste(as.character(x), collapse = &quot;, &quot;)
 #&gt; }
-#&gt; &lt;bytecode: 0x56195db66ee8&gt;
+#&gt; &lt;bytecode: 0x55a7fedae0f8&gt;
 #&gt; &lt;environment: namespace:knitr&gt;
 </code></pre>
 <h2 id="sec:man-knit_meta"><span class="section-number main-number">40</span> Metadata about objects to be printed</h2>
@@ -5103,7 +5103,7 @@ press again to hide the text column (show code).
 # knit these two vignettes using the docco style
 rocco_view(system.file(&quot;doc&quot;, &quot;docco-classic.Rmd&quot;, package = &quot;knitr&quot;))
 </code></pre>
-<pre><code class="language-plain warning">#&gt; You changed the working directory to /tmp/RtmpE6YsCW (probably via setwd()). It will be restored to /home/runner/work/_temp/Library/knitr/doc. See the Note section in ?knitr::knit
+<pre><code class="language-plain warning">#&gt; You changed the working directory to /tmp/RtmpbYj3t1 (probably via setwd()). It will be restored to /home/runner/work/_temp/Library/knitr/doc. See the Note section in ?knitr::knit
 </code></pre>
 <pre><code class="language-r">rocco_view(system.file(&quot;doc&quot;, &quot;knit_expand.Rmd&quot;, package = &quot;knitr&quot;))
 </code></pre>
@@ -5593,14 +5593,14 @@ found.
 <p>When the <span class="pkg">rmarkdown</span> package is not installed or not available, or
 <code>pandoc</code> cannot be found, the <code>knitr::rmarkdown</code> engine will
 fall back to the <code>knitr::knitr</code> engine, which uses R Markdown v1 based
-on the <span class="pkg">markdown</span> package.
+on the <span class="pkg">litedown</span> package.
 </p>
 <h3 id="sec:examples_49" class="unnumbered unlisted">Examples</h3>
 <pre><code class="language-r">library(knitr)
 vig_list = tools::vignetteEngine(package = &quot;knitr&quot;)
 str(vig_list)
 </code></pre>
-<pre><code>#&gt; List of 8
+<pre><code>#&gt; List of 10
 #&gt;  $ knitr::rmarkdown             :List of 6
 #&gt;   ..$ name   : chr &quot;rmarkdown&quot;
 #&gt;   ..$ package: chr &quot;knitr&quot;
@@ -5613,6 +5613,14 @@ str(vig_list)
 #&gt;   ..$ name   : chr &quot;docco_classic_notangle&quot;
 #&gt;   ..$ package: chr &quot;knitr&quot;
 #&gt;   ..$ pattern: chr &quot;[.][Rr]mk?d$&quot;
+#&gt;   ..$ weave  :function (file, driver, syntax, encoding = &quot;UTF-8&quot;, quiet = FALSE, ...)  
+#&gt;   ..$ tangle :function (file, ...)  
+#&gt;   ..$ aspell :List of 1
+#&gt;   .. ..$ filter:function (ifile, encoding = &quot;UTF-8&quot;)  
+#&gt;  $ knitr::rtyp_notangle         :List of 6
+#&gt;   ..$ name   : chr &quot;rtyp_notangle&quot;
+#&gt;   ..$ package: chr &quot;knitr&quot;
+#&gt;   ..$ pattern: chr &quot;[.][Rr]typ$&quot;
 #&gt;   ..$ weave  :function (file, driver, syntax, encoding = &quot;UTF-8&quot;, quiet = FALSE, ...)  
 #&gt;   ..$ tangle :function (file, ...)  
 #&gt;   ..$ aspell :List of 1
@@ -5637,6 +5645,14 @@ str(vig_list)
 #&gt;   ..$ name   : chr &quot;docco_classic&quot;
 #&gt;   ..$ package: chr &quot;knitr&quot;
 #&gt;   ..$ pattern: chr &quot;[.][Rr]mk?d$&quot;
+#&gt;   ..$ weave  :function (file, driver, syntax, encoding = &quot;UTF-8&quot;, quiet = FALSE, ...)  
+#&gt;   ..$ tangle :function (file, ..., encoding = &quot;UTF-8&quot;, quiet = FALSE)  
+#&gt;   ..$ aspell :List of 1
+#&gt;   .. ..$ filter:function (ifile, encoding = &quot;UTF-8&quot;)  
+#&gt;  $ knitr::rtyp                  :List of 6
+#&gt;   ..$ name   : chr &quot;rtyp&quot;
+#&gt;   ..$ package: chr &quot;knitr&quot;
+#&gt;   ..$ pattern: chr &quot;[.][Rr]typ$&quot;
 #&gt;   ..$ weave  :function (file, driver, syntax, encoding = &quot;UTF-8&quot;, quiet = FALSE, ...)  
 #&gt;   ..$ tangle :function (file, ..., encoding = &quot;UTF-8&quot;, quiet = FALSE)  
 #&gt;   ..$ aspell :List of 1
@@ -5696,7 +5712,7 @@ str(vig_list)
 #&gt;     else knit)(file, encoding = encoding, quiet = quiet, envir = globalenv(), 
 #&gt;         ...)
 #&gt; }
-#&gt; &lt;bytecode: 0x56195bb8e818&gt;
+#&gt; &lt;bytecode: 0x55a7fcde9e40&gt;
 #&gt; &lt;environment: namespace:knitr&gt;
 #&gt; 
 #&gt; $tangle
@@ -5704,7 +5720,7 @@ str(vig_list)
 #&gt; {
 #&gt;     purl(file, encoding = encoding, quiet = quiet, ...)
 #&gt; }
-#&gt; &lt;bytecode: 0x56195bb92700&gt;
+#&gt; &lt;bytecode: 0x55a7fcdede08&gt;
 #&gt; &lt;environment: namespace:knitr&gt;
 </code></pre>
 <pre><code class="language-r">vig_list[[&quot;knitr::knitr_notangle&quot;]][c(&quot;weave&quot;, &quot;tangle&quot;)]
@@ -5739,7 +5755,7 @@ str(vig_list)
 #&gt;     unlink(with_ext(file, &quot;R&quot;))
 #&gt;     return()
 #&gt; }
-#&gt; &lt;bytecode: 0x56195bbcc918&gt;
+#&gt; &lt;bytecode: 0x55a7fce36bb8&gt;
 #&gt; &lt;environment: namespace:knitr&gt;
 </code></pre>
 <pre><code class="language-r">vig_list[[&quot;knitr::docco_classic&quot;]][c(&quot;weave&quot;, &quot;tangle&quot;)]
@@ -5768,7 +5784,7 @@ str(vig_list)
 #&gt;     rocco(file, encoding = encoding, quiet = quiet, envir = globalenv(), 
 #&gt;         ...)
 #&gt; }
-#&gt; &lt;bytecode: 0x56195bbac800&gt;
+#&gt; &lt;bytecode: 0x55a7fce07f40&gt;
 #&gt; &lt;environment: namespace:knitr&gt;
 #&gt; 
 #&gt; $tangle
@@ -5776,7 +5792,7 @@ str(vig_list)
 #&gt; {
 #&gt;     purl(file, encoding = encoding, quiet = quiet, ...)
 #&gt; }
-#&gt; &lt;bytecode: 0x56195bb92700&gt;
+#&gt; &lt;bytecode: 0x55a7fcdede08&gt;
 #&gt; &lt;environment: namespace:knitr&gt;
 </code></pre>
 <h2 id="sec:man-wrap_rmd"><span class="section-number main-number">73</span> Wrap long lines in Rmd files</h2>
