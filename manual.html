@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="generator" content="litedown 0.10.3">
+<meta name="generator" content="litedown 0.11.1">
 <title>Help pages</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.69/css/default.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.69/css/article.min.css">
@@ -1498,6 +1498,11 @@ hook_r2swf(x, options)</code></pre>
 <p>These hooks are mainly for the package option <code>animation.fun</code>, e.g. you
 can set <code>opts_knit$set(animation.fun = hook_scianimator)</code>.
 </p>
+<p>Note that these hooks generate HTML code. For LaTeX output, you can set the
+chunk option <code>animation.hook</code> (or the package option
+<code>animation.fun</code>) to a function that generates LaTeX code; see
+<code><a href="#sec:man-hook-plot">hook_plot_tex</a></code>.
+</p>
 <h2 id="sec:man-hook_document"><span class="section-number main-number">19</span> Some potentially useful document hooks</h2>
 <h3 id="sec:description_19" class="unnumbered unlisted">Description</h3>
 <p>A document hook is a function to post-process the output document.
@@ -1576,6 +1581,14 @@ other options into consideration to align plots and set figure sizes, etc.
 Similarly, <code>hook_plot_html</code>, <code>hook_plot_md</code> and
 <code>hook_plot_rst</code> return character strings which are HTML, Markdown, reST
 code.
+</p>
+<p>For animations (i.e. when the chunk option <code>fig.show</code> is <code>'animate'</code>),
+<code>hook_plot_tex</code> generates &lsquo;<span class="samp">\animategraphics{}</span>&rsquo; unless a hook function
+has been provided via the chunk option <code>animation.hook</code> or the package option
+<code>animation.fun</code>, in which case that function generates the LaTeX code instead.
+It is called only once per chunk, with the filename of the last plot. The
+built-in hooks (e.g. <code><a href="#sec:man-hook-animation">hook_ffmpeg_html</a></code>) generate HTML, and are
+ignored for LaTeX output.
 </p>
 <p>In most cases we do not need to call these hooks explicitly, and they were
 designed to be used internally. Sometimes we may not be able to record R
@@ -2355,16 +2368,16 @@ kable(x, format.args = list(decimal.mark = &quot;,&quot;, big.mark = &quot;'&quo
 </code></pre>
 <pre><code>#&gt; |          V1|          V2|          V3|          V4|          V5|          V6|
 #&gt; |-----------:|-----------:|-----------:|-----------:|-----------:|-----------:|
-#&gt; | 1'008'810,7|   991'435,6| 1'000'354,2|   996'203,7| 1'019'583,1| 1'001'546,6|
-#&gt; |   993'653,6| 1'003'179,0| 1'000'368,2| 1'003'470,3|   983'745,8| 1'000'755,7|
-#&gt; | 1'008'401,4| 1'011'721,1|   993'571,2|   995'362,7| 1'009'329,7|   995'677,1|
-#&gt; |   984'513,1| 1'003'196,5|   982'605,6|   991'359,2| 1'000'902,9|   990'729,4|
-#&gt; | 1'008'244,1|   984'561,9|   999'604,4| 1'012'585,3|   997'559,0|   977'354,9|
-#&gt; |   983'493,3| 1'021'132,4| 1'011'136,1|   991'659,0| 1'009'837,3| 1'008'097,3|
-#&gt; |   989'998,2| 1'020'299,2|   984'113,0| 1'012'203,1| 1'003'323,6|   993'980,6|
-#&gt; |   993'299,6| 1'000'185,6|   962'764,5|   996'343,1| 1'014'846,3| 1'000'635,7|
-#&gt; |   990'036,6| 1'002'870,3| 1'003'215,8| 1'009'400,2| 1'002'651,9|   991'258,1|
-#&gt; |   987'786,6| 1'005'677,8| 1'011'303,2| 1'007'093,2| 1'017'300,4|   998'066,1|
+#&gt; |   999'563,1| 1'001'184,3| 1'009'294,7| 1'013'452,7| 1'002'299,1| 1'009'288,0|
+#&gt; |   988'113,1| 1'012'072,0|   989'627,7|   990'810,7| 1'007'597,1|   983'744,1|
+#&gt; |   979'069,4|   985'706,8| 1'005'089,1|   999'008,4|   984'677,3| 1'000'702,5|
+#&gt; |   996'585,0| 1'001'139,2| 1'004'689,7| 1'005'933,9| 1'021'420,0| 1'028'409,3|
+#&gt; |   997'081,0| 1'002'504,9|   993'944,6| 1'014'795,5| 1'010'580,2| 1'016'148,8|
+#&gt; |   983'278,3|   995'837,1|   999'978,5| 1'006'592,2|   992'875,9| 1'006'308,0|
+#&gt; | 1'008'479,2| 1'005'253,5|   997'369,0| 1'002'126,1| 1'029'259,4|   996'589,2|
+#&gt; |   995'251,1|   990'267,7|   993'544,4| 1'013'138,3|   999'260,8| 1'004'231,0|
+#&gt; |   998'104,7| 1'006'785,4| 1'011'891,2|   986'022,7| 1'001'069,0| 1'000'850,1|
+#&gt; | 1'008'760,5| 1'001'405,9|   996'479,9| 1'000'289,5|   996'314,3| 1'006'728,4|
 </code></pre>
 <pre><code class="language-r"># save the value
 x = kable(d2, format = &quot;html&quot;)
@@ -3406,7 +3419,7 @@ access or set hooks in this package.
 </code></pre>
 <pre><code>#&gt; function (x, options) 
 #&gt; x
-#&gt; &lt;bytecode: 0x5617e2896a10&gt;
+#&gt; &lt;bytecode: 0x562877931820&gt;
 #&gt; &lt;environment: namespace:knitr&gt;
 </code></pre>
 <pre><code class="language-r">knit_hooks$get(&quot;inline&quot;)
@@ -3417,7 +3430,7 @@ access or set hooks in this package.
 #&gt;         x = round_digits(x)
 #&gt;     paste(as.character(x), collapse = &quot;, &quot;)
 #&gt; }
-#&gt; &lt;bytecode: 0x5617e289a0d0&gt;
+#&gt; &lt;bytecode: 0x5628779310b0&gt;
 #&gt; &lt;environment: namespace:knitr&gt;
 </code></pre>
 <h2 id="sec:man-knit_meta"><span class="section-number main-number">40</span> Metadata about objects to be printed</h2>
@@ -5103,7 +5116,7 @@ press again to hide the text column (show code).
 # knit these two vignettes using the docco style
 rocco_view(system.file(&quot;doc&quot;, &quot;docco-classic.Rmd&quot;, package = &quot;knitr&quot;))
 </code></pre>
-<pre><code class="language-plain warning">#&gt; You changed the working directory to /tmp/RtmpaVgOwt (probably via setwd()). It will be restored to /home/runner/work/_temp/Library/knitr/doc. See the Note section in ?knitr::knit
+<pre><code class="language-plain warning">#&gt; You changed the working directory to /tmp/RtmpxX3dx1 (probably via setwd()). It will be restored to /home/runner/work/_temp/Library/knitr/doc. See the Note section in ?knitr::knit
 </code></pre>
 <pre><code class="language-r">rocco_view(system.file(&quot;doc&quot;, &quot;knit_expand.Rmd&quot;, package = &quot;knitr&quot;))
 </code></pre>
@@ -5712,7 +5725,7 @@ str(vig_list)
 #&gt;     else knit)(file, encoding = encoding, quiet = quiet, envir = globalenv(), 
 #&gt;         ...)
 #&gt; }
-#&gt; &lt;bytecode: 0x5617e05d6538&gt;
+#&gt; &lt;bytecode: 0x5628755804b0&gt;
 #&gt; &lt;environment: namespace:knitr&gt;
 #&gt; 
 #&gt; $tangle
@@ -5720,7 +5733,7 @@ str(vig_list)
 #&gt; {
 #&gt;     purl(file, encoding = encoding, quiet = quiet, ...)
 #&gt; }
-#&gt; &lt;bytecode: 0x5617e05e5bf0&gt;
+#&gt; &lt;bytecode: 0x5628755b9498&gt;
 #&gt; &lt;environment: namespace:knitr&gt;
 </code></pre>
 <pre><code class="language-r">vig_list[[&quot;knitr::knitr_notangle&quot;]][c(&quot;weave&quot;, &quot;tangle&quot;)]
@@ -5755,7 +5768,7 @@ str(vig_list)
 #&gt;     unlink(with_ext(file, &quot;R&quot;))
 #&gt;     return()
 #&gt; }
-#&gt; &lt;bytecode: 0x5617e06c0558&gt;
+#&gt; &lt;bytecode: 0x562875666530&gt;
 #&gt; &lt;environment: namespace:knitr&gt;
 </code></pre>
 <pre><code class="language-r">vig_list[[&quot;knitr::docco_classic&quot;]][c(&quot;weave&quot;, &quot;tangle&quot;)]
@@ -5784,7 +5797,7 @@ str(vig_list)
 #&gt;     rocco(file, encoding = encoding, quiet = quiet, envir = globalenv(), 
 #&gt;         ...)
 #&gt; }
-#&gt; &lt;bytecode: 0x5617e0633000&gt;
+#&gt; &lt;bytecode: 0x562875631948&gt;
 #&gt; &lt;environment: namespace:knitr&gt;
 #&gt; 
 #&gt; $tangle
@@ -5792,7 +5805,7 @@ str(vig_list)
 #&gt; {
 #&gt;     purl(file, encoding = encoding, quiet = quiet, ...)
 #&gt; }
-#&gt; &lt;bytecode: 0x5617e05e5bf0&gt;
+#&gt; &lt;bytecode: 0x5628755b9498&gt;
 #&gt; &lt;environment: namespace:knitr&gt;
 </code></pre>
 <h2 id="sec:man-wrap_rmd"><span class="section-number main-number">73</span> Wrap long lines in Rmd files</h2>
@@ -5864,7 +5877,7 @@ This feature may or may not be added in the future.
 </div>
 <footer><div class="flex-col">
 <p>Developed by <a href="https://yihui.org">Yihui Xie</a></p>
-<p>Site built with <a href="https://github.com/yihui/litedown">litedown</a> v0.10.3</p>
+<p>Site built with <a href="https://github.com/yihui/litedown">litedown</a> v0.11.1</p>
 </div></footer>
 <script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.69/js/sidenotes.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.69/js/appendix.min.js" defer></script>
