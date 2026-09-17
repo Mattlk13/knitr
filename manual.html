@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="generator" content="litedown 0.11.3">
+<meta name="generator" content="litedown 0.11.4">
 <title>Help pages</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.73/css/default.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.73/css/article.min.css">
@@ -1935,6 +1935,78 @@ rows to show in the table, e.g., <code>options(knitr.kable.max_rows = 30)</code>
 <h3 id="sec:value_17" class="unnumbered unlisted">Value</h3>
 <p>A character vector of the table source code.
 </p>
+<h3 id="sec:arguments-for-the-latex-format" class="unnumbered unlisted">Arguments for the <code>latex</code> format</h3>
+<dl>
+<dt><code>booktabs</code></dt><dd><p>(<code>FALSE</code>) Whether to use the <span class="pkg">booktabs</span> package
+style, i.e., generate <code>\toprule</code>, <code>\midrule</code>, and <code>\bottomrule</code>
+rules (and no vertical lines) instead of <code>\hline</code>.</p>
+</dd>
+<dt><code>longtable</code></dt><dd><p>(<code>FALSE</code>) Whether to use the <span class="pkg">longtable</span> package to
+generate a table that may span multiple pages. This is a shortcut for
+<code>tabular = 'longtable'</code>.</p>
+</dd>
+<dt><code>tabular</code></dt><dd><p>The name of the LaTeX tabular environment, e.g.,
+<code>'tabular'</code> (the default), <code>'longtable'</code>, <code>'tabularx'</code>, or
+<code>'xltabular'</code>.</p>
+</dd>
+<dt><code>valign</code></dt><dd><p>The vertical alignment of the table specified in the
+optional (or, for <code>tabularx</code>/<code>xltabular</code>, the mandatory) argument of
+the tabular environment, e.g., <code>'[t]'</code>. Only applied when a <code>caption</code>
+is present or <code>valign</code> is explicitly provided.</p>
+</dd>
+<dt><code>position</code></dt><dd><p>The floating position of the <code>table</code> environment,
+e.g., <code>'h'</code>, <code>'!htbp'</code>. Only used when the table is wrapped in a
+<code>table</code> environment (i.e., when there is a caption).</p>
+</dd>
+<dt><code>centering</code></dt><dd><p>(<code>TRUE</code>) Whether to center the table with
+<code>\centering</code> (only takes effect when a <code>caption</code> is present).</p>
+</dd>
+<dt><code>vline</code></dt><dd><p>The vertical line separator between columns in the tabular
+preamble (defaults to <code>''</code> for <code>booktabs = TRUE</code>, otherwise <code>'|'</code>).
+Can be set globally via the option <code>knitr.table.vline</code>.</p>
+</dd>
+<dt><code>toprule</code>, <code>midrule</code>, <code>bottomrule</code></dt><dd><p>The horizontal rules at the
+top of the table, after the header row, and at the bottom of the table,
+respectively. They default to <code>\toprule</code>/<code>\midrule</code>/<code>\bottomrule</code>
+for <code>booktabs = TRUE</code>, otherwise <code>\hline</code>. Each can also be set
+globally via the options <code>knitr.table.toprule</code>,
+<code>knitr.table.midrule</code>, and <code>knitr.table.bottomrule</code>.</p>
+</dd>
+<dt><code>linesep</code></dt><dd><p>The separator(s) between rows in the table body. By
+default, an empty separator is used and (for <code>booktabs = TRUE</code>) an
+<code>\addlinespace</code> is inserted after every 5 rows; for <code>booktabs = FALSE</code>, <code>\hline</code> is used between all rows. Provide a character vector
+to control the separators (it is recycled over the body rows).</p>
+</dd>
+<dt><code>caption.short</code></dt><dd><p>A short caption for the table, used in the List of
+Tables (the optional argument of <code>\caption[]{}</code>).</p>
+</dd>
+<dt><code>table.envir</code></dt><dd><p>The LaTeX environment that wraps the tabular
+environment, e.g., <code>'table'</code> (the default when a caption is present) or
+<code>'table*'</code>.</p>
+</dd>
+<dt><code>numeric.math</code></dt><dd><p>Whether to typeset numeric columns in math mode,
+which improves rendering of minus signs, infinite values, and scientific
+notation. The default can be set globally via
+<code>options(knitr.table.numeric.math = TRUE)</code>.</p>
+</dd>
+</dl>
+<h3 id="sec:arguments-for-the-html-format" class="unnumbered unlisted">Arguments for the <code>html</code> format</h3>
+<dl>
+<dt><code>table.attr</code></dt><dd><p>A character string of attributes for the <code>&lt;table&gt;</code>
+tag, e.g., <code>'class="table" id="mytable"'</code>. Can be set globally via the
+option <code>knitr.table.html.attr</code>.</p>
+</dd>
+</dl>
+<h3 id="sec:arguments-for-the-pipe-simple-rst-jira-and-org-formats" class="unnumbered unlisted">Arguments for the <code>pipe</code>, <code>simple</code>, <code>rst</code>, <code>jira</code>, and <code>org</code> formats</h3>
+<dl>
+<dt><code>padding</code></dt><dd><p>(<code>1</code>) The number of spaces used to pad table cells. Set
+<code>padding = 0</code> for no inner padding. Not used by the <code>rst</code> format.</p>
+</dd>
+<dt><code>caption.label</code></dt><dd><p>The prefix printed before the caption. It defaults
+to <code>'Table:'</code> for the <code>pipe</code> format and <code>'#+CAPTION:'</code> for the
+<code>org</code> format.</p>
+</dd>
+</dl>
 <h3 id="sec:note_12" class="unnumbered unlisted">Note</h3>
 <p>When using <code>kable()</code> as a <em>top-level</em> expression, you do not
 need to explicitly <code>print()</code> it due to R's automatic implicit
@@ -1943,7 +2015,7 @@ printing. When it is wrapped inside other expressions (such as a
 </p>
 <h3 id="sec:references_11" class="unnumbered unlisted">References</h3>
 <p>See
-<a href="https://bookdown.org/yihui/rmarkdown-cookbook/kable.html">https://bookdown.org/yihui/rmarkdown-cookbook/kable.html</a> for some
+<a href="https://pkg.yihui.org/rmarkdown-cookbook/kable.html">https://pkg.yihui.org/rmarkdown-cookbook/kable.html</a> for some
 examples about this function, including specific arguments according to the
 <code>format</code> selected.
 </p>
@@ -1953,7 +2025,7 @@ examples about this function, including specific arguments according to the
 <span class="pkg">ascii</span> and <span class="pkg">pander</span> for different flavors of markdown output and
 some advanced features and table styles. For more on other packages for
 creating tables, see
-<a href="https://bookdown.org/yihui/rmarkdown-cookbook/table-other.html">https://bookdown.org/yihui/rmarkdown-cookbook/table-other.html</a>.
+<a href="https://pkg.yihui.org/rmarkdown-cookbook/table-other.html">https://pkg.yihui.org/rmarkdown-cookbook/table-other.html</a>.
 </p>
 <h3 id="sec:examples_16" class="unnumbered unlisted">Examples</h3>
 <pre><code class="language-r">d1 = head(iris)
@@ -2357,16 +2429,16 @@ kable(x, format.args = list(decimal.mark = &quot;,&quot;, big.mark = &quot;'&quo
 </code></pre>
 <pre><code>#&gt; |          V1|          V2|          V3|          V4|          V5|          V6|
 #&gt; |-----------:|-----------:|-----------:|-----------:|-----------:|-----------:|
-#&gt; | 1'011'929,0| 1'007'475,3|   985'680,9| 1'013'780,0| 1'014'860,6|   997'529,6|
-#&gt; | 1'004'700,0| 1'003'583,8|   993'360,6| 1'008'936,0| 1'012'856,8| 1'011'346,3|
-#&gt; | 1'009'372,2| 1'009'440,2|   991'040,5| 1'002'850,5| 1'024'801,1| 1'010'792,7|
-#&gt; | 1'007'882,9|   990'638,2|   981'001,0| 1'005'510,0| 1'017'268,2| 1'011'381,1|
-#&gt; | 1'008'535,5| 1'017'873,6| 1'008'854,1| 1'001'652,9| 1'013'320,8|   985'378,8|
-#&gt; |   988'931,6|   998'966,5|   999'452,7| 1'001'747,6|   997'749,3| 1'000'855,7|
-#&gt; |   994'486,4| 1'000'293,2| 1'016'262,5|   996'470,6| 1'007'970,5|   994'766,4|
-#&gt; |   996'728,7|   998'409,1|   998'651,9|   998'654,0| 1'001'441,0| 1'013'045,6|
-#&gt; | 1'015'561,3|   994'556,5|   987'501,3| 1'015'069,6|   992'748,3| 1'002'125,1|
-#&gt; |   997'364,4| 1'014'413,9|   978'164,1|   974'014,7| 1'004'279,1|   997'637,5|
+#&gt; | 1'000'099,0| 1'009'576,5|   987'319,8|   996'832,3|   994'520,2| 1'009'368,6|
+#&gt; | 1'011'159,0| 1'003'581,7| 1'003'371,9|   986'757,7|   995'683,7| 1'017'669,4|
+#&gt; |   983'404,0|   988'858,7|   990'980,1|   992'514,5|   996'418,1| 1'002'522,9|
+#&gt; |   991'427,5| 1'022'423,6|   985'554,8| 1'008'564,1| 1'002'508,3|   991'299,4|
+#&gt; | 1'011'240,8|   987'109,8| 1'026'255,5|   997'578,8|   989'737,9| 1'015'430,1|
+#&gt; |   985'968,4|   998'633,9|   995'778,5| 1'010'100,6|   988'141,7|   988'510,4|
+#&gt; | 1'017'087,9|   984'570,6| 1'012'065,2| 1'000'554,2| 1'004'338,4| 1'005'313,2|
+#&gt; |   996'136,1| 1'000'879,6| 1'013'818,8| 1'020'433,4| 1'008'666,3|   996'026,8|
+#&gt; |   982'145,7|   999'469,0| 1'006'544,5|   999'871,1|   999'586,1| 1'007'158,8|
+#&gt; |   995'795,3| 1'004'608,4|   976'116,7|   990'229,6| 1'002'656,9| 1'014'956,2|
 </code></pre>
 <pre><code class="language-r"># save the value
 x = kable(d2, format = &quot;html&quot;)
@@ -3403,7 +3475,7 @@ access or set hooks in this package.
 </code></pre>
 <pre><code>#&gt; function (x, options) 
 #&gt; x
-#&gt; &lt;bytecode: 0x556d24584ef8&gt;
+#&gt; &lt;bytecode: 0x55f641de8388&gt;
 #&gt; &lt;environment: namespace:knitr&gt;
 </code></pre>
 <pre><code class="language-r">knit_hooks$get(&quot;inline&quot;)
@@ -3414,7 +3486,7 @@ access or set hooks in this package.
 #&gt;         x = round_digits(x)
 #&gt;     paste(as.character(x), collapse = &quot;, &quot;)
 #&gt; }
-#&gt; &lt;bytecode: 0x556d24584788&gt;
+#&gt; &lt;bytecode: 0x55f63ff87fe8&gt;
 #&gt; &lt;environment: namespace:knitr&gt;
 </code></pre>
 <h2 id="sec:man-knit_meta"><span class="section-number main-number">40</span> Metadata about objects to be printed</h2>
@@ -4202,7 +4274,7 @@ functions.
 <h3 id="sec:references_25" class="unnumbered unlisted">References</h3>
 <p>See output hooks in <a href="https://yihui.org/knitr/hooks/">https://yihui.org/knitr/hooks/</a>, and
 some examples in
-<a href="https://bookdown.org/yihui/rmarkdown-cookbook/output-hooks.html">https://bookdown.org/yihui/rmarkdown-cookbook/output-hooks.html</a>
+<a href="https://pkg.yihui.org/rmarkdown-cookbook/output-hooks.html">https://pkg.yihui.org/rmarkdown-cookbook/output-hooks.html</a>
 </p>
 <p>Jekyll and Liquid:
 <a href="https://github.com/jekyll/jekyll/wiki/Liquid-Extensions">https://github.com/jekyll/jekyll/wiki/Liquid-Extensions</a>; prettify.js:
@@ -5098,7 +5170,7 @@ press again to hide the text column (show code).
 # knit these two vignettes using the docco style
 rocco_view(system.file(&quot;doc&quot;, &quot;docco-classic.Rmd&quot;, package = &quot;knitr&quot;))
 </code></pre>
-<pre><code class="language-plain warning">#&gt; You changed the working directory to /tmp/RtmpE5AjJs (probably via setwd()). It will be restored to /home/runner/work/_temp/Library/knitr/doc. See the Note section in ?knitr::knit
+<pre><code class="language-plain warning">#&gt; You changed the working directory to /tmp/RtmpuXJc67 (probably via setwd()). It will be restored to /home/runner/work/_temp/Library/knitr/doc. See the Note section in ?knitr::knit
 </code></pre>
 <pre><code class="language-r">rocco_view(system.file(&quot;doc&quot;, &quot;knit_expand.Rmd&quot;, package = &quot;knitr&quot;))
 </code></pre>
@@ -5707,7 +5779,7 @@ str(vig_list)
 #&gt;     else knit)(file, encoding = encoding, quiet = quiet, envir = globalenv(), 
 #&gt;         ...)
 #&gt; }
-#&gt; &lt;bytecode: 0x556d21f96198&gt;
+#&gt; &lt;bytecode: 0x55f63ebde8d0&gt;
 #&gt; &lt;environment: namespace:knitr&gt;
 #&gt; 
 #&gt; $tangle
@@ -5715,7 +5787,7 @@ str(vig_list)
 #&gt; {
 #&gt;     purl(file, encoding = encoding, quiet = quiet, ...)
 #&gt; }
-#&gt; &lt;bytecode: 0x556d21f99d38&gt;
+#&gt; &lt;bytecode: 0x55f63ebe3b90&gt;
 #&gt; &lt;environment: namespace:knitr&gt;
 </code></pre>
 <pre><code class="language-r">vig_list[[&quot;knitr::knitr_notangle&quot;]][c(&quot;weave&quot;, &quot;tangle&quot;)]
@@ -5750,7 +5822,7 @@ str(vig_list)
 #&gt;     unlink(with_ext(file, &quot;R&quot;))
 #&gt;     return()
 #&gt; }
-#&gt; &lt;bytecode: 0x556d21fec720&gt;
+#&gt; &lt;bytecode: 0x55f63ec75060&gt;
 #&gt; &lt;environment: namespace:knitr&gt;
 </code></pre>
 <pre><code class="language-r">vig_list[[&quot;knitr::docco_classic&quot;]][c(&quot;weave&quot;, &quot;tangle&quot;)]
@@ -5779,7 +5851,7 @@ str(vig_list)
 #&gt;     rocco(file, encoding = encoding, quiet = quiet, envir = globalenv(), 
 #&gt;         ...)
 #&gt; }
-#&gt; &lt;bytecode: 0x556d21fb0bb8&gt;
+#&gt; &lt;bytecode: 0x55f63ec18038&gt;
 #&gt; &lt;environment: namespace:knitr&gt;
 #&gt; 
 #&gt; $tangle
@@ -5787,7 +5859,7 @@ str(vig_list)
 #&gt; {
 #&gt;     purl(file, encoding = encoding, quiet = quiet, ...)
 #&gt; }
-#&gt; &lt;bytecode: 0x556d21f99d38&gt;
+#&gt; &lt;bytecode: 0x55f63ebe3b90&gt;
 #&gt; &lt;environment: namespace:knitr&gt;
 </code></pre>
 <h2 id="sec:man-wrap_rmd"><span class="section-number main-number">73</span> Wrap long lines in Rmd files</h2>
@@ -5859,7 +5931,7 @@ This feature may or may not be added in the future.
 </div>
 <footer><div class="flex-col">
 <p>Developed by <a href="https://yihui.org">Yihui Xie</a></p>
-<p>Site built with <a href="https://github.com/yihui/litedown">litedown</a> v0.11.3</p>
+<p>Site built with <a href="https://github.com/yihui/litedown">litedown</a> v0.11.4</p>
 </div></footer>
 <script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.73/js/sidenotes.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.73/js/appendix.min.js" defer></script>
