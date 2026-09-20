@@ -2516,6 +2516,13 @@ tag, e.g., <code>'class="table" id="mytable"'</code>. Can be set globally via th
 option <code>knitr.table.html.attr</code>.</p>
 </dd>
 </dl>
+<p>Column headers are always given the <code>scope="col"</code> attribute for
+accessibility. In addition, if the option <code>knitr.table.html.row.header</code> is
+set to <code>TRUE</code>, the row-name cells (i.e., the first column when row names are
+included) are marked up as row headers with <code>&lt;th scope="row"&gt;</code> instead of
+<code>&lt;td&gt;</code>. This is off by default because <code>&lt;th&gt;</code> cells may be rendered
+differently from <code>&lt;td&gt;</code> (e.g., in bold) and could affect existing styles.
+</p>
 <h3 id="sec:arguments-for-the-pipe-simple-rst-jira-and-org-formats" class="unnumbered unlisted">Arguments for the <code>pipe</code>, <code>simple</code>, <code>rst</code>, <code>jira</code>, and <code>org</code> formats</h3>
 <dl>
 <dt><code>padding</code></dt><dd><p>(<code>1</code>) The number of spaces used to pad table cells. Set
@@ -2621,11 +2628,11 @@ kable(d2, format = &quot;pipe&quot;, padding = 2)
 <pre><code>#&gt; &lt;table&gt;
 #&gt;  &lt;thead&gt;
 #&gt;   &lt;tr&gt;
-#&gt;    &lt;th style=&quot;text-align:right;&quot;&gt; Sepal.Length &lt;/th&gt;
-#&gt;    &lt;th style=&quot;text-align:right;&quot;&gt; Sepal.Width &lt;/th&gt;
-#&gt;    &lt;th style=&quot;text-align:right;&quot;&gt; Petal.Length &lt;/th&gt;
-#&gt;    &lt;th style=&quot;text-align:right;&quot;&gt; Petal.Width &lt;/th&gt;
-#&gt;    &lt;th style=&quot;text-align:left;&quot;&gt; Species &lt;/th&gt;
+#&gt;    &lt;th scope=&quot;col&quot; style=&quot;text-align:right;&quot;&gt; Sepal.Length &lt;/th&gt;
+#&gt;    &lt;th scope=&quot;col&quot; style=&quot;text-align:right;&quot;&gt; Sepal.Width &lt;/th&gt;
+#&gt;    &lt;th scope=&quot;col&quot; style=&quot;text-align:right;&quot;&gt; Petal.Length &lt;/th&gt;
+#&gt;    &lt;th scope=&quot;col&quot; style=&quot;text-align:right;&quot;&gt; Petal.Width &lt;/th&gt;
+#&gt;    &lt;th scope=&quot;col&quot; style=&quot;text-align:left;&quot;&gt; Species &lt;/th&gt;
 #&gt;   &lt;/tr&gt;
 #&gt;  &lt;/thead&gt;
 #&gt; &lt;tbody&gt;
@@ -2705,11 +2712,11 @@ kable(d2, format = &quot;pipe&quot;, padding = 2)
 #&gt; &lt;caption&gt;Title of the table&lt;/caption&gt;
 #&gt;  &lt;thead&gt;
 #&gt;   &lt;tr&gt;
-#&gt;    &lt;th style=&quot;text-align:right;&quot;&gt; Sepal.Length &lt;/th&gt;
-#&gt;    &lt;th style=&quot;text-align:right;&quot;&gt; Sepal.Width &lt;/th&gt;
-#&gt;    &lt;th style=&quot;text-align:right;&quot;&gt; Petal.Length &lt;/th&gt;
-#&gt;    &lt;th style=&quot;text-align:right;&quot;&gt; Petal.Width &lt;/th&gt;
-#&gt;    &lt;th style=&quot;text-align:left;&quot;&gt; Species &lt;/th&gt;
+#&gt;    &lt;th scope=&quot;col&quot; style=&quot;text-align:right;&quot;&gt; Sepal.Length &lt;/th&gt;
+#&gt;    &lt;th scope=&quot;col&quot; style=&quot;text-align:right;&quot;&gt; Sepal.Width &lt;/th&gt;
+#&gt;    &lt;th scope=&quot;col&quot; style=&quot;text-align:right;&quot;&gt; Petal.Length &lt;/th&gt;
+#&gt;    &lt;th scope=&quot;col&quot; style=&quot;text-align:right;&quot;&gt; Petal.Width &lt;/th&gt;
+#&gt;    &lt;th scope=&quot;col&quot; style=&quot;text-align:left;&quot;&gt; Species &lt;/th&gt;
 #&gt;   &lt;/tr&gt;
 #&gt;  &lt;/thead&gt;
 #&gt; &lt;tbody&gt;
@@ -2847,11 +2854,11 @@ kable(d1, format = &quot;html&quot;, table.attr = &quot;id=\&quot;mytable\&quot;
 <pre><code>#&gt; &lt;table id=&quot;mytable&quot;&gt;
 #&gt;  &lt;thead&gt;
 #&gt;   &lt;tr&gt;
-#&gt;    &lt;th style=&quot;text-align:right;&quot;&gt; Sepal.Length &lt;/th&gt;
-#&gt;    &lt;th style=&quot;text-align:right;&quot;&gt; Sepal.Width &lt;/th&gt;
-#&gt;    &lt;th style=&quot;text-align:right;&quot;&gt; Petal.Length &lt;/th&gt;
-#&gt;    &lt;th style=&quot;text-align:right;&quot;&gt; Petal.Width &lt;/th&gt;
-#&gt;    &lt;th style=&quot;text-align:left;&quot;&gt; Species &lt;/th&gt;
+#&gt;    &lt;th scope=&quot;col&quot; style=&quot;text-align:right;&quot;&gt; Sepal.Length &lt;/th&gt;
+#&gt;    &lt;th scope=&quot;col&quot; style=&quot;text-align:right;&quot;&gt; Sepal.Width &lt;/th&gt;
+#&gt;    &lt;th scope=&quot;col&quot; style=&quot;text-align:right;&quot;&gt; Petal.Length &lt;/th&gt;
+#&gt;    &lt;th scope=&quot;col&quot; style=&quot;text-align:right;&quot;&gt; Petal.Width &lt;/th&gt;
+#&gt;    &lt;th scope=&quot;col&quot; style=&quot;text-align:left;&quot;&gt; Species &lt;/th&gt;
 #&gt;   &lt;/tr&gt;
 #&gt;  &lt;/thead&gt;
 #&gt; &lt;tbody&gt;
@@ -2948,16 +2955,16 @@ kable(x, format.args = list(decimal.mark = &quot;,&quot;, big.mark = &quot;'&quo
 </code></pre>
 <pre><code>#&gt; |          V1|          V2|          V3|          V4|          V5|          V6|
 #&gt; |-----------:|-----------:|-----------:|-----------:|-----------:|-----------:|
-#&gt; |   989'593,2| 1'009'401,3|   995'342,3| 1'000'683,3|   993'218,6| 1'005'252,9|
-#&gt; |   983'977,9|   984'287,2|   991'468,3|   995'549,9|   995'213,7|   998'162,3|
-#&gt; | 1'010'736,4| 1'008'736,2|   997'473,1| 1'010'378,9|   998'681,7| 1'003'642,1|
-#&gt; | 1'017'552,5| 1'008'692,9|   994'167,7|   988'822,1|   990'434,2| 1'004'855,4|
-#&gt; | 1'002'574,9| 1'013'645,7|   998'099,3|   998'121,5| 1'003'997,6|   985'637,0|
-#&gt; |   993'315,7|   998'670,4| 1'003'592,1|   990'295,1|   995'790,5| 1'005'124,9|
-#&gt; |   995'582,7|   994'982,7|   996'838,5|   986'105,1|   991'692,9| 1'004'427,9|
-#&gt; | 1'004'032,7| 1'010'172,7| 1'000'313,5| 1'000'027,5|   992'674,3|   995'190,0|
-#&gt; |   976'964,4| 1'004'087,3| 1'022'947,6|   988'016,1|   977'786,0| 1'027'484,9|
-#&gt; |   992'238,3|   992'565,0|   983'347,4|   998'540,2| 1'005'503,4|   986'732,0|
+#&gt; |   981'790,4|   991'299,4|   982'034,0|   989'978,7|   988'709,3| 1'001'248,5|
+#&gt; |   978'832,3| 1'009'726,6|   996'751,7| 1'011'567,0|   987'344,7| 1'012'588,0|
+#&gt; |   991'301,4| 1'001'599,7|   999'366,6| 1'005'882,0| 1'000'920,5| 1'008'117,3|
+#&gt; |   978'227,0| 1'009'675,8|   996'697,3| 1'013'986,0|   992'154,8| 1'010'880,5|
+#&gt; | 1'012'761,3| 1'021'551,7|   995'278,5| 1'002'266,8|   998'872,5| 1'012'129,1|
+#&gt; |   993'945,4|   987'386,0| 1'012'636,7| 1'007'710,2| 1'006'502,2| 1'008'906,8|
+#&gt; | 1'008'559,3| 1'004'363,9| 1'009'845,5| 1'015'811,2| 1'004'025,2|   977'610,2|
+#&gt; | 1'010'966,1|   994'859,8| 1'005'213,1|   986'294,0|   987'236,7| 1'021'078,1|
+#&gt; |   998'680,7| 1'003'279,4| 1'002'139,9|   988'676,9| 1'001'057,8| 1'008'960,2|
+#&gt; | 1'012'085,7|   999'544,8| 1'004'592,2| 1'003'778,2| 1'002'537,4| 1'004'230,1|
 </code></pre>
 <pre><code class="language-r"># save the value
 x = kable(d2, format = &quot;html&quot;)
@@ -2967,17 +2974,17 @@ cat(x, sep = &quot;\n&quot;)
 #&gt;  &lt;thead&gt;
 #&gt;   &lt;tr&gt;
 #&gt;    &lt;th style=&quot;text-align:left;&quot;&gt;   &lt;/th&gt;
-#&gt;    &lt;th style=&quot;text-align:right;&quot;&gt; mpg &lt;/th&gt;
-#&gt;    &lt;th style=&quot;text-align:right;&quot;&gt; cyl &lt;/th&gt;
-#&gt;    &lt;th style=&quot;text-align:right;&quot;&gt; disp &lt;/th&gt;
-#&gt;    &lt;th style=&quot;text-align:right;&quot;&gt; hp &lt;/th&gt;
-#&gt;    &lt;th style=&quot;text-align:right;&quot;&gt; drat &lt;/th&gt;
-#&gt;    &lt;th style=&quot;text-align:right;&quot;&gt; wt &lt;/th&gt;
-#&gt;    &lt;th style=&quot;text-align:right;&quot;&gt; qsec &lt;/th&gt;
-#&gt;    &lt;th style=&quot;text-align:right;&quot;&gt; vs &lt;/th&gt;
-#&gt;    &lt;th style=&quot;text-align:right;&quot;&gt; am &lt;/th&gt;
-#&gt;    &lt;th style=&quot;text-align:right;&quot;&gt; gear &lt;/th&gt;
-#&gt;    &lt;th style=&quot;text-align:right;&quot;&gt; carb &lt;/th&gt;
+#&gt;    &lt;th scope=&quot;col&quot; style=&quot;text-align:right;&quot;&gt; mpg &lt;/th&gt;
+#&gt;    &lt;th scope=&quot;col&quot; style=&quot;text-align:right;&quot;&gt; cyl &lt;/th&gt;
+#&gt;    &lt;th scope=&quot;col&quot; style=&quot;text-align:right;&quot;&gt; disp &lt;/th&gt;
+#&gt;    &lt;th scope=&quot;col&quot; style=&quot;text-align:right;&quot;&gt; hp &lt;/th&gt;
+#&gt;    &lt;th scope=&quot;col&quot; style=&quot;text-align:right;&quot;&gt; drat &lt;/th&gt;
+#&gt;    &lt;th scope=&quot;col&quot; style=&quot;text-align:right;&quot;&gt; wt &lt;/th&gt;
+#&gt;    &lt;th scope=&quot;col&quot; style=&quot;text-align:right;&quot;&gt; qsec &lt;/th&gt;
+#&gt;    &lt;th scope=&quot;col&quot; style=&quot;text-align:right;&quot;&gt; vs &lt;/th&gt;
+#&gt;    &lt;th scope=&quot;col&quot; style=&quot;text-align:right;&quot;&gt; am &lt;/th&gt;
+#&gt;    &lt;th scope=&quot;col&quot; style=&quot;text-align:right;&quot;&gt; gear &lt;/th&gt;
+#&gt;    &lt;th scope=&quot;col&quot; style=&quot;text-align:right;&quot;&gt; carb &lt;/th&gt;
 #&gt;   &lt;/tr&gt;
 #&gt;  &lt;/thead&gt;
 #&gt; &lt;tbody&gt;
@@ -3278,6 +3285,12 @@ the R script generated by <code>purl()</code>. This seems to be obvious, but som
 people
 <a href="https://stat.ethz.ch/pipermail/r-devel/2014-May/069113.html">do not get it</a>.
 </p>
+<p>If the first code chunk of the document is not R but another language,
+<code>purl()</code> tangles the document to a script in that language instead, using
+the engine name as the file extension by default (e.g. &lsquo;<span class="file">foo.py</span>&rsquo; for
+<code>python</code>; pass the <code>output</code> argument to override). Chunk headers become
+<code>#%%</code> code cells, and chunks of other languages are ignored.
+</p>
 <h3 id="sec:references_12" class="unnumbered unlisted">References</h3>
 <p>Package homepage: <a href="https://yihui.org/knitr/">https://yihui.org/knitr/</a>. The <span class="pkg">knitr</span>
 <a href="https://yihui.org/knitr/demo/manual/">main manual</a>: and
@@ -3308,7 +3321,7 @@ people
 <pre><code class="language-r">purl(f)  # tangle R code
 </code></pre>
 <pre><code class="language-plain message">#&gt; processing file: /home/runner/work/_temp/Library/knitr/examples/knitr-minimal.Rnw
-#&gt; output file: knitr-minimal.R
+#&gt; output file: knitr-minimal.setup
 </code></pre>
 <pre><code>#&gt; 1/7                
 #&gt; 2/7 [setup]        
@@ -3317,12 +3330,12 @@ people
 #&gt; 5/7                
 #&gt; 6/7 [boring-plots] 
 #&gt; 7/7                
-#&gt; [1] &quot;knitr-minimal.R&quot;
+#&gt; [1] &quot;knitr-minimal.setup&quot;
 </code></pre>
 <pre><code class="language-r">purl(f, documentation = 0)  # extract R code only
 </code></pre>
 <pre><code class="language-plain message">#&gt; processing file: /home/runner/work/_temp/Library/knitr/examples/knitr-minimal.Rnw
-#&gt; output file: knitr-minimal.R
+#&gt; output file: knitr-minimal.setup
 </code></pre>
 <pre><code>#&gt; 1/7                
 #&gt; 2/7 [setup]        
@@ -3331,12 +3344,12 @@ people
 #&gt; 5/7                
 #&gt; 6/7 [boring-plots] 
 #&gt; 7/7                
-#&gt; [1] &quot;knitr-minimal.R&quot;
+#&gt; [1] &quot;knitr-minimal.setup&quot;
 </code></pre>
 <pre><code class="language-r">purl(f, documentation = 2)  # also include documentation
 </code></pre>
 <pre><code class="language-plain message">#&gt; processing file: /home/runner/work/_temp/Library/knitr/examples/knitr-minimal.Rnw
-#&gt; output file: knitr-minimal.R
+#&gt; output file: knitr-minimal.setup
 </code></pre>
 <pre><code>#&gt; 1/7                
 #&gt; 2/7 [setup]        
@@ -3345,7 +3358,7 @@ people
 #&gt; 5/7                
 #&gt; 6/7 [boring-plots] 
 #&gt; 7/7                
-#&gt; [1] &quot;knitr-minimal.R&quot;
+#&gt; [1] &quot;knitr-minimal.setup&quot;
 </code></pre>
 <pre><code class="language-r">unlink(c(&quot;knitr-minimal.tex&quot;, &quot;knitr-minimal.R&quot;, &quot;figure&quot;), recursive = TRUE)
 </code></pre>
@@ -3846,8 +3859,8 @@ engines.
 #&gt; [22] &quot;asis&quot;      &quot;asy&quot;       &quot;block&quot;     &quot;block2&quot;    &quot;bslib&quot;     &quot;c&quot;         &quot;cat&quot;      
 #&gt; [29] &quot;cc&quot;        &quot;comment&quot;   &quot;css&quot;       &quot;ditaa&quot;     &quot;dot&quot;       &quot;embed&quot;     &quot;eviews&quot;   
 #&gt; [36] &quot;exec&quot;      &quot;fortran&quot;   &quot;fortran95&quot; &quot;go&quot;        &quot;highlight&quot; &quot;js&quot;        &quot;julia&quot;    
-#&gt; [43] &quot;python&quot;    &quot;R&quot;         &quot;Rcpp&quot;      &quot;sass&quot;      &quot;scss&quot;      &quot;sql&quot;       &quot;stan&quot;     
-#&gt; [50] &quot;targets&quot;   &quot;tikz&quot;      &quot;verbatim&quot; 
+#&gt; [43] &quot;ps&quot;        &quot;python&quot;    &quot;R&quot;         &quot;Rcpp&quot;      &quot;sass&quot;      &quot;scss&quot;      &quot;sql&quot;      
+#&gt; [50] &quot;stan&quot;      &quot;targets&quot;   &quot;tikz&quot;      &quot;verbatim&quot; 
 </code></pre>
 <h2 id="sec:man-knit_exit"><span class="section-number main-number">35</span> Exit knitting early</h2>
 <h3 id="sec:description_35" class="unnumbered unlisted">Description</h3>
@@ -3994,7 +4007,7 @@ access or set hooks in this package.
 </code></pre>
 <pre><code>#&gt; function (x, options) 
 #&gt; x
-#&gt; &lt;bytecode: 0x564dc14c7320&gt;
+#&gt; &lt;bytecode: 0x5639adea8930&gt;
 #&gt; &lt;environment: namespace:knitr&gt;
 </code></pre>
 <pre><code class="language-r">knit_hooks$get(&quot;inline&quot;)
@@ -4005,7 +4018,7 @@ access or set hooks in this package.
 #&gt;         x = round_digits(x)
 #&gt;     paste(as.character(x), collapse = &quot;, &quot;)
 #&gt; }
-#&gt; &lt;bytecode: 0x564dc14c7b00&gt;
+#&gt; &lt;bytecode: 0x5639adea9180&gt;
 #&gt; &lt;environment: namespace:knitr&gt;
 </code></pre>
 <h2 id="sec:man-knit_meta"><span class="section-number main-number">40</span> Metadata about objects to be printed</h2>
@@ -5760,7 +5773,7 @@ press again to hide the text column (show code).
 # knit these two vignettes using the docco style
 rocco_view(system.file(&quot;doc&quot;, &quot;docco-classic.Rmd&quot;, package = &quot;knitr&quot;))
 </code></pre>
-<pre><code class="language-plain warning">#&gt; You changed the working directory to /tmp/Rtmp6oZ6d5 (probably via setwd()). It will be restored to /home/runner/work/_temp/Library/knitr/doc. See the Note section in ?knitr::knit
+<pre><code class="language-plain warning">#&gt; You changed the working directory to /tmp/Rtmp16eSoq (probably via setwd()). It will be restored to /home/runner/work/_temp/Library/knitr/doc. See the Note section in ?knitr::knit
 </code></pre>
 <pre><code class="language-r">rocco_view(system.file(&quot;doc&quot;, &quot;knit_expand.Rmd&quot;, package = &quot;knitr&quot;))
 </code></pre>
@@ -6382,7 +6395,7 @@ str(vig_list)
 #&gt;     else knit)(file, encoding = encoding, quiet = quiet, envir = globalenv(), 
 #&gt;         ...)
 #&gt; }
-#&gt; &lt;bytecode: 0x564dc078a860&gt;
+#&gt; &lt;bytecode: 0x5639ad82fcf0&gt;
 #&gt; &lt;environment: namespace:knitr&gt;
 #&gt; 
 #&gt; $tangle
@@ -6390,7 +6403,7 @@ str(vig_list)
 #&gt; {
 #&gt;     purl(file, encoding = encoding, quiet = quiet, ...)
 #&gt; }
-#&gt; &lt;bytecode: 0x564dc078c928&gt;
+#&gt; &lt;bytecode: 0x5639ad839c50&gt;
 #&gt; &lt;environment: namespace:knitr&gt;
 </code></pre>
 <pre><code class="language-r">vig_list[[&quot;knitr::knitr_notangle&quot;]][c(&quot;weave&quot;, &quot;tangle&quot;)]
@@ -6425,7 +6438,7 @@ str(vig_list)
 #&gt;     unlink(with_ext(file, &quot;R&quot;))
 #&gt;     return()
 #&gt; }
-#&gt; &lt;bytecode: 0x564dc08703a8&gt;
+#&gt; &lt;bytecode: 0x5639ad896a18&gt;
 #&gt; &lt;environment: namespace:knitr&gt;
 </code></pre>
 <pre><code class="language-r">vig_list[[&quot;knitr::docco_classic&quot;]][c(&quot;weave&quot;, &quot;tangle&quot;)]
@@ -6454,7 +6467,7 @@ str(vig_list)
 #&gt;     rocco(file, encoding = encoding, quiet = quiet, envir = globalenv(), 
 #&gt;         ...)
 #&gt; }
-#&gt; &lt;bytecode: 0x564dc08392f8&gt;
+#&gt; &lt;bytecode: 0x5639ad852210&gt;
 #&gt; &lt;environment: namespace:knitr&gt;
 #&gt; 
 #&gt; $tangle
@@ -6462,7 +6475,7 @@ str(vig_list)
 #&gt; {
 #&gt;     purl(file, encoding = encoding, quiet = quiet, ...)
 #&gt; }
-#&gt; &lt;bytecode: 0x564dc078c928&gt;
+#&gt; &lt;bytecode: 0x5639ad839c50&gt;
 #&gt; &lt;environment: namespace:knitr&gt;
 </code></pre>
 <h2 id="sec:man-wrap_rmd"><span class="section-number main-number">74</span> Wrap long lines in Rmd files</h2>
