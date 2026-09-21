@@ -525,6 +525,12 @@
 <h3 id="sec:new-features_1" class="unnumbered">NEW FEATURES</h3>
 <ul>
 <li>
+<p>The file path in the “Quitting from” message (shown when a chunk fails) is now a clickable hyperlink in front-ends that support terminal hyperlinks (e.g., the RStudio IDE, which sets the environment variable <code>RSTUDIO_CLI_HYPERLINKS</code>), so you can jump straight to the line where the error occurred. In other environments, the plain path is shown as before (thanks, <a href="https://github.com/olivroy">@olivroy</a>, <a href="https://github.com/yihui/knitr/issues/2153">#2153</a>).</p>
+</li>
+<li>
+<p>Warnings emitted while knitting can now show an <strong>rlang</strong> backtrace, in the same way errors already do. Set <code>options(rlang_backtrace_on_warning_report = &quot;full&quot;)</code> (or <code>&quot;branch&quot;</code>) to append the call tree that led to each warning, which makes it much easier to locate where a warning came from in a large document. This is off by default (thanks, <a href="https://github.com/hadley">@hadley</a>, <a href="https://github.com/yihui/knitr/issues/2219">#2219</a>).</p>
+</li>
+<li>
 <p>Added a function <code>quarto_profile()</code> to get the active Quarto <a href="https://quarto.org/docs/projects/profiles.html">profile(s)</a> from the environment variable <code>QUARTO_PROFILE</code>, or to test whether a given profile is active. This makes conditional chunk output easier, e.g., <code>eval = knitr::quarto_profile('production')</code> (thanks, <a href="https://github.com/cderv">@cderv</a>, <a href="https://github.com/yihui/knitr/issues/2216">#2216</a>).</p>
 </li>
 <li>
@@ -633,6 +639,9 @@ registerS3method(
 </ul>
 <h3 id="sec:bug-fixes_1" class="unnumbered">BUG FIXES</h3>
 <ul>
+<li>
+<p>A <code>sql</code> chunk that contains no <code>?</code>-style interpolation variable is no longer passed to <code>DBI::sqlParseVariables()</code> / <code>DBI::sqlInterpolate()</code>. Those functions re-lex the SQL and could raise a spurious <code>Unterminated literal</code> error on valid queries that they cannot fully parse, such as Postgres dollar-quoted string constants (e.g. <code>SELECT $$Dianne's horse$$;</code>). Interpolation of <code>?</code>-variables is unaffected (thanks, <a href="https://github.com/ZhangAngus">@ZhangAngus</a>, <a href="https://github.com/rstudio/rmarkdown/issues/2342">rstudio/rmarkdown#2342</a>).</p>
+</li>
 <li>
 <p>When the chunk option <code>eval</code> is a numeric vector (i.e., only certain lines of a chunk are evaluated), the lines that are echoed but not evaluated are no longer prefixed with the comment marker <code>## </code> in the output. This makes it possible to show one line of code but the result of another without polluting the displayed source, e.g., <code>eval = 2</code> on a chunk containing <code>mtcars</code> and <code>rmarkdown::paged_table(mtcars)</code> echoes both lines as-is but only runs the second one (thanks, <a href="https://github.com/cderv">@cderv</a>, <a href="https://github.com/yihui/knitr/issues/2129">#2129</a>).</p>
 </li>
